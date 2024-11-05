@@ -1,0 +1,29 @@
+{
+  "name": "myflix",
+  "version": "1.0.0",
+  "description": "myFlix is a movie app that allows user to search for movies that match some criteria",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahir33/CF-myFlix.git"
+  },
+  "keywords": [
+    "movie",
+    "search",
+    "api",
+    "myflix"
+  ],
+  "author": "mahir33",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mahir33/CF-myFlix/issues"
+  },
+  "homepage": "https://github.com/Mahir33/CF-myFlix#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1"
+  }
+}
