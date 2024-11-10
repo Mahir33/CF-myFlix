@@ -4,12 +4,174 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>myFlix - Docs</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>How to use myFlix.</h1>
-    <p>
-        <ul>myFlix allows you to view List of movies, directors, and genres and much more!</ul>
-        <ul>myFlix allows you to sign up and update your personal information and create a list of your favorite movies.</ul>
-    </p>
+    <h1>How to use myFlix API.</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Business Logic</th>
+                <th>URL</th>
+                <th>HTTP Method</th>
+                <th>Query Parameters</th>
+                <th>Request body data format</th>
+                <th>Response body data format</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Return a list of ALL movies to the user</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>none</td>
+                <td>none</td>
+                <td>A JSON object holding data about all movies</td>
+            </tr>
+            <tr>
+                <td>
+                    Return data (description, genre, director, image URL,
+                    whether it’s featured or not) about a single movie by
+                    title to the user
+                </td>
+                <td>/movies/:name</td>
+                <td>GET</td>
+                <td>name (URL parameter)</td>
+                <td>none</td>
+                <td>
+                    A JSON object holding data about a single movie
+                    including description, genre, director, image URL.
+                    Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;title: 'Star Wars: Episode 1',<br />
+                    &nbsp;&nbsp;description: 'A movie about Jedi and
+                    Sith',<br />
+                    &nbsp;&nbsp;genre : 'Sci-Fi',<br />
+                    &nbsp;&nbsp;director: 'George Lucas',<br />
+                    &nbsp;&nbsp;imageUrl: 'https://www.exampleimage.com'<br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Return data about a genre (description) by name/title
+                    (e.g., “Thriller”)
+                </td>
+                <td>/genres/:name</td>
+                <td>GET</td>
+                <td>name (URL parameter)</td>
+                <td>none</td>
+                <td>
+                    A JSON object holding data about a single movie
+                    including description, genre, director, image URL.
+                    Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;name: 'Thriller',<br />
+                    &nbsp;&nbsp;description: 'Thrillers are very
+                    thrilling'<br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Return data about a director (bio, birth year, death
+                    year) by name
+                </td>
+                <td>/directors/:name</td>
+                <td>GET</td>
+                <td>name (URL parameter)</td>
+                <td>none</td>
+                <td>
+                    A JSON object holding data about a director including
+                    bio, birth year and death year. Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;name: 'George Lucas',<br />
+                    &nbsp;&nbsp;bio: 'A talented director and founder of the
+                    best Sci-Fi universe.',<br />
+                    &nbsp;&nbsp;birth year: '05/14/1944',<br />
+                    &nbsp;&nbsp;death year: 'alive'<br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Register a new user</td>
+                <td>/users/register</td>
+                <td>POST</td>
+                <td>none</td>
+                <td>
+                    A JSON object holding data about a new user (username,
+                    email, password). Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;username: 'Nick Elback',<br />
+                    &nbsp;&nbsp;email: 'nic.kelback@mail.com',<br />
+                    &nbsp;&nbsp;password: '********'<br />
+                    }
+                </td>
+                <td>A confirmation or an error message.</td>
+            </tr>
+            <tr>
+                <td>Allow users to update their username</td>
+                <td>/users/:username</td>
+                <td>PUT</td>
+                <td>username (URL parameter)</td>
+                <td>
+                    A JSON object holding updated data about the username.
+                    Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;username: 'Nic Kelback'<br />
+                    }
+                </td>
+                <td>
+                    A confirmation message and updated user data or an error
+                    message. Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;username: 'Nic Kelback',<br />
+                    &nbsp;&nbsp;email: 'nic.kelback@mail.com',<br />
+                    &nbsp;&nbsp;password: '********'<br />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Allow users to add a movie to their list of favorites
+                </td>
+                <td>/users/:username/favorites</td>
+                <td>POST</td>
+                <td>username (URL parameter)</td>
+                <td>
+                    A JSON object holding data about a favorite movie.
+                    Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;title: 'Peter Jackson's King Kong'<br />
+                    }
+                </td>
+                <td>A confirmation or an error message.</td>
+            </tr>
+            <tr>
+                <td>
+                    Allow users to remove a movie of their list of favorites
+                </td>
+                <td>/users/:username/favorites/:movieTitle</td>
+                <td>DELETE</td>
+                <td>username (URL parameter), movieTitle (URL parameter)</td>
+                <td>
+                    A JSON object holding data about a favorite movie to
+                    remove. Example: <br />
+                    {<br />
+                    &nbsp;&nbsp;title: 'Peter Jackson's King Kong'<br />
+                    }
+                </td>
+                <td>A confirmation or an error message.</td>
+            </tr>
+            <tr>
+                <td>Allow existing users to deregister</td>
+                <td>/users/:username/</td>
+                <td>DELETE</td>
+                <td>username (URL parameter)</td>
+                <td>none</td>
+                <td>A confirmation or an error message.</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
