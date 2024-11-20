@@ -34,9 +34,9 @@
                     whether it’s featured or not) about a single movie by
                     title to the user
                 </td>
-                <td>/movies/:name</td>
+                <td>/movies/:title</td>
                 <td>GET</td>
-                <td>name (URL parameter)</td>
+                <td>title (URL parameter)</td>
                 <td>none</td>
                 <td>
                     A JSON object holding data about a single movie
@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td>Register a new user</td>
-                <td>/users/register</td>
+                <td>/users</td>
                 <td>POST</td>
                 <td>none</td>
                 <td>
@@ -105,6 +105,7 @@
                     &nbsp;&nbsp;username: 'Nick Elback',<br />
                     &nbsp;&nbsp;email: 'nic.kelback@mail.com',<br />
                     &nbsp;&nbsp;password: '********'<br />
+                    &nbsp;&nbsp;birthday: 'YYYY-MM-DD'<br>
                     }
                 </td>
                 <td>A confirmation or an error message.</td>
@@ -118,16 +119,17 @@
                     A JSON object holding updated data about the username.
                     Example: <br />
                     {<br />
-                    &nbsp;&nbsp;username: 'Nic Kelback'<br />
+                    &nbsp;&nbsp;username: 'New Username'<br />
                     }
                 </td>
                 <td>
                     A confirmation message and updated user data or an error
                     message. Example: <br />
                     {<br />
-                    &nbsp;&nbsp;username: 'Nic Kelback',<br />
+                    &nbsp;&nbsp;username: 'New Username',<br />
                     &nbsp;&nbsp;email: 'nic.kelback@mail.com',<br />
                     &nbsp;&nbsp;password: '********'<br />
+                    &nbsp;&nbsp;birthday: 'YYYY-MM-DD'<br>
                     }
                 </td>
             </tr>
@@ -151,15 +153,13 @@
                 <td>
                     Allow users to remove a movie of their list of favorites
                 </td>
-                <td>/users/:username/favorites/:movieTitle</td>
+                <td>/users/:username/favorites/:movieId</td>
                 <td>DELETE</td>
-                <td>username (URL parameter), movieTitle (URL parameter)</td>
+                <td>username (URL parameter), movieId (URL parameter)</td>
                 <td>
                     A JSON object holding data about a favorite movie to
                     remove. Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;title: 'Peter Jackson's King Kong'<br />
-                    }
+                    '6739dcb803cac6190e0d8190' <br>
                 </td>
                 <td>A confirmation or an error message.</td>
             </tr>
