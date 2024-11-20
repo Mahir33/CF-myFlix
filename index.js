@@ -191,6 +191,38 @@ app.get('/directors/:Name', async (req, res) => {
   .catch(err => res.status(404).send('Director not found'))
 });
 
+// GET all users
+app.get('/users', async (req, res) => {
+  await Users.find()
+      .then((users) => {
+          res.json(users);
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+      });
+});
+
+
+// GET user by username
+app.get('/users/:Username', async (req, res) => {
+  await Users.findOne({ Username: req.params.Username })
+      .then((user) => {
+          if (user) {
+              res.json(user);
+          } else {
+              res.status(404).send('User with the username ' + req.params.Username + ' does not exist.'
+              );
+          }
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+      });
+});
+
+
+
 // POST user - register user
 app.post('/users', async (req, res) => {
     await Users.findOne({ Username: req.body.Username })
