@@ -20,8 +20,25 @@ const dbUrl = 'mongodb://127.0.0.1:27017/newMyFlixDB';
 
 mongoose.connect(dbUrl);
 
-// Middleware
-app.use(cors());
+// ---> Middleware <---
+
+// cors
+let allowedOrigins = [
+  'http://localhost:8080', 
+  'http://testsite.com'
+];
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      let message = "The CORS policy for this application doesn't allow access from origin " + origin;
+      return callback(new Error(message), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -287,4 +304,5 @@ app.get('/', (req, res) => {
 
 
 // SERVER LISTENER
-app.listen(8080, () => console.log('Server is running on port 8080'));
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => console.log('Server is running on port ' + port));
