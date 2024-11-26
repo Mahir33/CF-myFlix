@@ -1,274 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>myFlix - Docs</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>How to use myFlix API.</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Business Logic</th>
-                <th>URL</th>
-                <th>HTTP Method</th>
-                <th>Query Parameters</th>
-                <th>Request body data format</th>
-                <th>Response body data format</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- GET all movies -->
-            <tr>
-                <td>Return a list of ALL movies to the user</td>
-                <td>/movies</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>none</td>
-                <td>A JSON object holding data about all movies</td>
-            </tr>
-            <!-- GET a single movie -->
-            <tr>
-                <td>
-                    Return data (description, genre, director, actors,
-                    release year, image URL, whether it’s featured or not)
-                    about a single movie by title to the user as a JSON
-                    object.
-                </td>
-                <td>/movies/:Title</td>
-                <td>GET</td>
-                <td>title (URL parameter)</td>
-                <td>none</td>
-                <td>
-                    A JSON object holding data about a single movie
-                    including id, description, genre, director, actors,
-                    release year, image URL. Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"Title": "Star Wars: Episode 1",<br />
-                    &nbsp;&nbsp;"Description": "A movie about Jedi and
-                    Sith",<br />
-                    &nbsp;&nbsp;"Director":{ <br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Name": "George Lucas",<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Bio": "A talented
-                    director...",<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Movies": ["Star Wars", "Indiana
-                    Jones"],<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Birthdate": "1944-05-14",<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Deathdate": null,<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;},<br />
-                    &nbsp;&nbsp;"Genre": {,<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Name": "Science Fiction",<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;"Description": "A genre that
-                    explores futuristic concepts...",<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;},<br />
-                    &nbsp;&nbsp;"Actors": ["Mark Hammil", "Harrison
-                    Ford"],<br />
-                    &nbsp;&nbsp;"ReleaseYear": 1971,<br />
-                    &nbsp;&nbsp;"ImageURL":
-                    "https://www.exampleimage.com"<br />
-                    &nbsp;&nbsp;"Featured": true<br />
-                    }
-                </td>
-            </tr>
-            <!-- GET a genre -->
-            <tr>
-                <td>
-                    Return data about a genre by name (e.g., “Thriller”)
-                </td>
-                <td>/genre/:Name</td>
-                <td>GET</td>
-                <td>name (URL parameter)</td>
-                <td>none</td>
-                <td>
-                    A JSON object holding data about a single genre by name.
-                    Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"Name": "Thriller",<br />
-                    &nbsp;&nbsp;"Description": "Thrillers are very
-                    thrilling"<br />
-                    }
-                </td>
-            </tr>
-            <!-- GET a director -->
-            <tr>
-                <td>
-                    Return data about a director (bio, birth year, death
-                    year) by name
-                </td>
-                <td>/director/:Name</td>
-                <td>GET</td>
-                <td>name (URL parameter)</td>
-                <td>none</td>
-                <td>
-                    A JSON object holding data about a director including
-                    bio, birth year, death year and movies. Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"Name": "George Lucas",<br />
-                    &nbsp;&nbsp;"Bio": "A talented director and founder of
-                    the best Sci-Fi universe.",<br />
-                    &nbsp;&nbsp;"Birthdate": "05/14/1944",<br />
-                    &nbsp;&nbsp;"Deathdate": "alive"<br />
-                    &nbsp;&nbsp;"Movies": ["Star Wars: A New Hope", "Star
-                    Wars. The Empire Strikes Back"]<br />
-                    }
-                </td>
-            </tr>
-            <!-- POST a new user -->
-            <tr>
-                <td>Register a new user</td>
-                <td>/users/register</td>
-                <td>POST</td>
-                <td>none</td>
-                <td>
-                    A JSON object holding data about a new user (username,
-                    email, password). Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"Username": "john_doe" (required),<br />
-                    &nbsp;&nbsp;"Email": "john.doe@mail.com" (required),<br />
-                    &nbsp;&nbsp;"Password": "Hello123" (required),<br />
-                    &nbsp;&nbsp;"Birthday": "1997-05-23",<br />
-                    &nbsp;&nbsp;"FavoriteMovies":
-                    ["12nedie4556433ceccds"]<br />
-                    }
-                </td>
-                <td>
-                    A JSON object holding data about the new user including
-                    an unique id. Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"Username": "john_doe" (required),<br />
-                    &nbsp;&nbsp;"Email": "john.doe@mail.com" (required),<br />
-                    &nbsp;&nbsp;"Password": "Hello123" (required),<br />
-                    &nbsp;&nbsp;"Birthday": "1997-05-23",<br />
-                    &nbsp;&nbsp;"FavoriteMovies":
-                    ["12nedie4556433ceccds"],<br />
-                    &nbsp;&nbsp;"_id": "66d97c65f395cff30704a0c5"<br />
-                    }
-                </td>
-            </tr>
-            <!-- GET all users-->
-            <tr>
-                <td>Return a list of ALL users</td>
-                <td>/users</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>none</td>
-                <td>A JSON object holding data about all users</td>
-            </tr>
-            <!-- GET a single user by Username-->
-            <td>
-                Return data (id, username, email, password, favorite movies)
-                about a single user by username.
-            </td>
-            <td>/users/:Username</td>
-            <td>GET</td>
-            <td>Username (URL parameter)</td>
-            <td>none</td>
-            <td>
-                A JSON object holding data about a single user including id,
-                username, email, password, birthday and favorite movies.
-                Example: <br />
-                {<br />
-                &nbsp;&nbsp;"Username": "john_doe",<br />
-                &nbsp;&nbsp;"Email": "john.doe@mail.com",<br />
-                &nbsp;&nbsp;"Password": "Hello123",<br />
-                &nbsp;&nbsp;"Birthday": "1997-05-23",<br />
-                &nbsp;&nbsp;"FavoriteMovies": ["12nedie4556433ceccds"],<br />
-                &nbsp;&nbsp;"_id": "66d97c65f395cff30704a0c5"<br />
-                }
-            </td>
-            <!-- PUT a username -->
-            <tr>
-                <td>Allow users to update their username</td>
-                <td>/users/:Username</td>
-                <td>PUT</td>
-                <td>username (URL parameter)</td>
-                <td>
-                    A JSON object holding updated data about the username.
-                    Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"Username": "Adam_Dev;",<br />
-                    &nbsp;&nbsp;"Email": "ademwl@mail.com",<br />
-                    &nbsp;&nbsp;"Password": "Hello1234",<br />
-                    &nbsp;&nbsp;"Birthday": "1986-11-12",<br />
-                    &nbsp;&nbsp;"FavoriteMovies": ["3rbsi473bidbcw3r3r"]<br />
-                    }
-                </td>
-                <td>
-                    A JSON object holding the updated data about the user.
-                    Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;username: 'AdamWroDev',<br />
-                    &nbsp;&nbsp;email: 'ademw@mail.com',<br />
-                    &nbsp;&nbsp;password: 'Hello1234'<br />
-                    &nbsp;&nbsp;"Birthday": "1986-12-11",<br />
-                    &nbsp;&nbsp;"FavoriteMovies": ["3rbsi473bidbcw3r3r"],<br />
-                    &nbsp;&nbsp;"_id": "66d97c65f395cff30704a0c4"<br />
-                    }
-                </td>
-            </tr>
-            <!-- POST a movie to list of favorites -->
-            <tr>
-                <td>
-                    Allow users to add a movie to their list of favorites
-                </td>
-                <td>/users/:Username/favorites</td>
-                <td>POST</td>
-                <td>username (URL parameter)</td>
-                <td>
-                    A JSON object holding data about a favorite movie.
-                    Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;"FavoriteMovies": ["92e12hds89dbqwi82s"]<br />
-                    }
-                </td>
-                <td>
-                    A JSON object holding updated data about a user.
-                    Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;username: 'Nic Kelback',<br />
-                    &nbsp;&nbsp;email: 'nic.kelback@mail.com',<br />
-                    &nbsp;&nbsp;password: 'Hello1234'<br />
-                    &nbsp;&nbsp;"Birthday": "1998-06-23",<br />
-                    &nbsp;&nbsp;"FavoriteMovies": ["3rbsi473bidbcw3r3r",
-                    "92e12hds89dbqwi82s"],<br />
-                    &nbsp;&nbsp;"_id": "66d97c65f395cff30704a0c4"<br />
-                    }
-                </td>
-            </tr>
-            <!-- DELETE a movie from list of favorites -->
-            <tr>
-                <td>
-                    Allow users to remove a movie of their list of favorites
-                </td>
-                <td>/users/:Username/favorites/:movieID</td>
-                <td>DELETE</td>
-                <td>Username (URL parameter), movieID (URL parameter)</td>
-                <td>none</td>
-                <td>
-                    A JSON object holding updated data about a user.
-                    Example: <br />
-                    {<br />
-                    &nbsp;&nbsp;username: 'Nic Kelback',<br />
-                    &nbsp;&nbsp;email: 'nic.kelback@mail.com',<br />
-                    &nbsp;&nbsp;password: 'Hello1234'<br />
-                    &nbsp;&nbsp;"Birthday": "1998-06-23",<br />
-                    &nbsp;&nbsp;"FavoriteMovies": ["3rbsi473bidbcw3r3r"],<br />
-                    &nbsp;&nbsp;"_id": "66d97c65f395cff30704a0c4"<br />
-                    }
-                </td>
-            </tr>
-            <!-- DELETE an existing user -->
-            <tr>
-                <td>Allow existing users to deregister</td>
-                <td>/users/:username/</td>
-                <td>DELETE</td>
-                <td>username (URL parameter)</td>
-                <td>none</td>
-                <td>A confirmation or an error message.</td>
-            </tr>
-        </tbody>
-    </table>
+  <h1>myFlix API Documentation</h1>
+  
+  <h2>Middleware</h2>
+  <p>The application uses the following middleware:</p>
+  <ul>
+    <li><strong>body-parser</strong>: Parses incoming request bodies in a middleware before your handlers, available under the `req.body` property.</li>
+    <li><strong>express</strong>: A minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.</li>
+    <li><strong>morgan</strong>: HTTP request logger middleware for Node.js.</li>
+    <li><strong>cors</strong>: Middleware to enable Cross-Origin Resource Sharing (CORS).</li>
+    <li><strong>passport</strong>: Middleware for authentication in Node.js applications.</li>
+  </ul>
+
+  <h2>Endpoints</h2>
+
+  <h3>Register a new user</h3>
+  <p><strong>POST /users</strong></p>
+  <p>Registers a new user.</p>
+  <pre>
+    Request Body:
+    {
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date"
+    }
+  </pre>
+  <pre>
+    Response:
+    {
+      "_id": "string",
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date"
+    }
+  </pre>
+
+  <h3>Login</h3>
+  <p><strong>POST /login</strong></p>
+  <p>Logs in a user and returns a JWT token.</p>
+  <pre>
+    Request Body:
+    {
+      "Username": "string",
+      "Password": "string"
+    }
+  </pre>
+  <pre>
+    Response:
+    {
+      "user": {
+        "_id": "string",
+        "Username": "string",
+        "Email": "string",
+        "Birthday": "date"
+      },
+      "token": "string"
+    }
+  </pre>
+
+  <h2>Movies</h2>
+  <p>All endpoints related to movies.</p>
+
+  <h3>Get all movies</h3>
+  <p><strong>GET /movies</strong></p>
+  <p>Returns a list of all movies.</p>
+  <pre>
+    Response:
+    [
+      {
+        "_id": "string",
+        "Title": "string",
+        "Description": "string",
+        "Genre": {
+          "Name": "string",
+          "Description": "string"
+        },
+        "Director": {
+          "Name": "string",
+          "Bio": "string",
+          "Birth": "date",
+          "Death": "date"
+        },
+        "Actors": ["string"],
+        "ImagePath": "string",
+        "Featured": "boolean"
+      }
+    ]
+  </pre>
+
+  <h3>Get a movie by title</h3>
+  <p><strong>GET /movies/:Title</strong></p>
+  <p>Returns data about a single movie by title.</p>
+  <pre>
+    Response:
+    {
+      "_id": "string",
+      "Title": "string",
+      "Description": "string",
+      "Genre": {
+        "Name": "string",
+        "Description": "string"
+      },
+      "Director": {
+        "Name": "string",
+        "Bio": "string",
+        "Birth": "date",
+        "Death": "date"
+      },
+      "Actors": ["string"],
+      "ImagePath": "string",
+      "Featured": "boolean"
+    }
+  </pre>
+
+  <h3>Get genre by name</h3>
+  <p><strong>GET /genres/:Name</strong></p>
+  <p>Returns data about a genre by name.</p>
+  <pre>
+    Response:
+    {
+      "Name": "string",
+      "Description": "string"
+    }
+  </pre>
+
+  <h3>Get director by name</h3>
+  <p><strong>GET /directors/:Name</strong></p>
+  <p>Returns data about a director by name.</p>
+  <pre>
+    Response:
+    {
+      "Name": "string",
+      "Bio": "string",
+      "Birth": "date",
+      "Death": "date"
+    }
+  </pre>
+
+  <h2>Users</h2>
+  <p>All endpoints related to users.</p>
+
+  <h3>Get all users</h3>
+  <p><strong>GET /users</strong></p>
+  <p>Returns a list of all users.</p>
+  <pre>
+    Response:
+    [
+      {
+        "_id": "string",
+        "Username": "string",
+        "Password": "string",
+        "Email": "string",
+        "Birthday": "date"
+      }
+    ]
+  </pre>
+
+  <h3>Get a user by username</h3>
+  <p><strong>GET /users/:Username</strong></p>
+  <p>Returns data about a single user by username.</p>
+  <pre>
+    Response:
+    {
+      "_id": "string",
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date"
+    }
+  </pre>
+
+  <h3>Update a user's info</h3>
+  <p><strong>PUT /users/:Username</strong></p>
+  <p>Updates the data of a user by username.</p>
+  <pre>
+    Request Body:
+    {
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date"
+    }
+  </pre>
+  <pre>
+    Response:
+    {
+      "_id": "string",
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date"
+    }
+  </pre>
+
+  <h3>Add a movie to a user's list of favorites</h3>
+  <p><strong>POST /users/:Username/movies/:MovieID</strong></p>
+  <p>Adds a movie to a user's list of favorite movies.</p>
+  <pre>
+    Response:
+    {
+      "_id": "string",
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date",
+      "FavoriteMovies": ["string"]
+    }
+  </pre>
+
+  <h3>Remove a movie from a user's list of favorites</h3>
+  <p><strong>DELETE /users/:Username/movies/:MovieID</strong></p>
+  <p>Removes a movie from a user's list of favorite movies.</p>
+  <pre>
+    Response:
+    {
+      "_id": "string",
+      "Username": "string",
+      "Password": "string",
+      "Email": "string",
+      "Birthday": "date",
+      "FavoriteMovies": ["string"]
+    }
+  </pre>
+
+  <h3>Delete a user</h3>
+  <p><strong>DELETE /users/:Username</strong></p>
+  <p>Deletes a user by username.</p>
+  <pre>
+    Response:
+    {
+      "message": "User [Username] was deleted."
+    }
+  </pre>
+
 </body>
 </html>

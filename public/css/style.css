@@ -1,3 +1,12 @@
-table, th, td {
-    border: 2px solid black;
-}
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  h1, h2 {
+    color: #333;
+  }
+  pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
