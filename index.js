@@ -1,34 +1,33 @@
 const bodyParser = require('body-parser');
+const express = require('express');
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
+const app = express();
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const cors = require('cors');
+const passport = require('passport');
 
-const express = require('express'), 
-morgan = require('morgan'), 
-fs = require('fs'), 
-path = require('path'), 
-app = express(),
-mongoose = require('mongoose'),
-Models = require('./models.js'),
-cors = require('cors'),
-auth = require('./auth')(app),
-passport = require('passport');
+require('./passport.js');
 
-require('./passport.js')
+const Movies = Models.Movie;
+const Users = Models.User;
+const Directors = Models.Director;
+const Genres = Models.Genre;
 
-const Movies = Models.Movie,
-Users = Models.User,
-Directors = Models.Director,
-Genres = Models.Genre;
-
-const dbUrl = 'mongodb://127.0.0.1:27017/newMyFlixDB'
+const dbUrl = 'mongodb://127.0.0.1:27017/newMyFlixDB';
 
 mongoose.connect(dbUrl);
 
 // Middleware
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Import routes
+require('./auth')(app);
 
 
 
