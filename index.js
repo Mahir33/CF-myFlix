@@ -16,9 +16,9 @@ const Users = Models.User;
 const Directors = Models.Director;
 const Genres = Models.Genre;
 
-const dbUrl = 'mongodb://127.0.0.1:27017/newMyFlixDB';
-
-mongoose.connect(dbUrl);
+// const dbUrl = 'mongodb://127.0.0.1:27017/newMyFlixDB';
+const dbAtlasURL = process.env.CONNECTION_URI;
+mongoose.connect(dbAtlasURL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // ---> Middleware <---
 
