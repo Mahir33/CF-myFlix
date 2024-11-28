@@ -65,7 +65,7 @@ app.post('/users', async (req, res) => {
   await Users.findOne({ Username: req.body.Username })
   .then((user) => {
     if (user) {
-      return res.status(400).send(req.body.Username + 'already exists');
+      return res.status(400).send(req.body.Username + ' already exists');
     } else {
       const birthday = new Date(req.body.Birthday);
       if (isNaN(birthday)) {
@@ -76,7 +76,8 @@ app.post('/users', async (req, res) => {
           Username: req.body.Username,
           Password: req.body.Password,
           Email: req.body.Email,
-          Birthday: req.body.Birthday
+          Birthday: req.body.Birthday,
+          FavoriteMovies: []
         })
         .then((user) =>{res.status(201).json(user) })
       .catch((error) => {
