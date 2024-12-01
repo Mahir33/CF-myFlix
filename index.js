@@ -202,11 +202,19 @@ app.put('/users/:Username', passport.authenticate('jwt', {session:false}), async
       return res.status(400).send('Permission denied');
     } 
 
+
+    // Check if required fields are provided and are not empty
     const requiredFields = ['Username', 'Password', 'Email'];
     for (const field of requiredFields) {
         if (req.body.hasOwnProperty(field) && (!req.body[field] || req.body[field].length === 0)) {
             return res.status(400).send(`${field} is required and can not be empty.`);
         }
+    }
+
+    // Check if email is in a valid format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (req.body.Email && !emailRegex.test(req.body.Email)) {
+        return res.status(400).send('Email is not in a valid format.');
     }
 
     await Users.findOneAndUpdate({ "Username": req.params.Username }, 
