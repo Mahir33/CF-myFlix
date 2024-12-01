@@ -202,19 +202,19 @@ app.put('/users/:Username', passport.authenticate('jwt', {session:false}), async
       return res.status(400).send('Permission denied');
     } 
 
-    if (!req.body.Username || !req.body.Username.length) {
+    if(req.body.Username && req.body.Username.length === 0) {
       return res.status(400).send('Username is required and can not be empty.');
     }
     
-    if(req.body.Username.length < 5) {
-      return res.status(400).send('Username must be at least 5 characters long.');
-    }
+    // if(req.body.Username.length < 5) {
+    //   return res.status(400).send('Username must be at least 5 characters long.');
+    // }
 
-    if (!req.body.Password || !req.body.Password.length) {
+    if (req.body.Password && req.body.Password.length === 0) {
       return res.status(400).send('Password is required and can not be empty.');
     }
 
-    if (!req.body.Email || !req.body.Email.length) {
+    if (req.body.Email && req.body.Email.length === 0) {
       return res.status(400).send('Email is required and can not be empty.');
     }
 
