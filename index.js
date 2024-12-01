@@ -79,7 +79,7 @@ app.post('/users', async (req, res) => {
           Birthday: req.body.Birthday,
           FavoriteMovies: []
         })
-        .then((user) =>{res.status(201).json(user) })
+        .then((user) => {res.status(201).json(user) })
       .catch((error) => {
         console.error(error);
         return res.status(500).send('Error: ' + error);
@@ -200,6 +200,22 @@ app.put('/users/:Username', passport.authenticate('jwt', {session:false}), async
   
     if(req.user.Username !== req.params.Username){
       return res.status(400).send('Permission denied');
+    } 
+
+    if (!req.body.Username.length) {
+      return res.status(400).send('Username is required and can not be empty.');
+    } 
+    
+    if(req.body.Username.length < 5) {
+      return res.status(400).send('Username must be at least 5 characters long.');
+    }
+
+    if (!req.body.Password.length) {
+      return res.status(400).send('Password is required and can not be empty.');
+    }
+
+    if (!req.body.Email.length) {
+      return res.status(400).send('Email is required and can not be empty.');
     }
 
     await Users.findOneAndUpdate({ "Username": req.params.Username }, 
