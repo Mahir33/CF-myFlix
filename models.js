@@ -28,14 +28,10 @@ const movieSchema = mongoose.Schema({
     Name: String,
     Description: String
   },
-  Director: {
-    Name: String,
-    Bio: String,
-    Birth: Date,
-    Death: Date
-  },
+  Director: { type: mongoose.Schema.Types.ObjectId, ref: 'Director', required: true },
+  Genre: { type: mongoose.Schema.Types.ObjectId, ref: 'Genre', required: true },
   Actors: [String],
-  ImagePath: String,
+  Image_url: String,
   Featured: Boolean
 });
 
