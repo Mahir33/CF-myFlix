@@ -25,7 +25,8 @@ mongoose.connect(dbAtlasURL, { useNewUrlParser: true, useUnifiedTopology: true }
 // cors
 let allowedOrigins = [
   'http://localhost:8080', 
-  'http://testsite.com'
+  'http://testsite.com', 
+  'http://localhost:1234'
 ];
 app.use(cors({
   origin: (origin, callback) => {
