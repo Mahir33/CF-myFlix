@@ -98,6 +98,8 @@ app.post('/users', async (req, res) => {
 // GET all movies
 app.get('/movies', async (req, res) => {
    await Movies.find()
+   .populate('Genre')
+  .populate('Director')
   .then((movies) => {
      res.json(movies);
   })
