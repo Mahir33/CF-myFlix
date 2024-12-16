@@ -26,12 +26,13 @@ mongoose.connect(dbAtlasURL, { useNewUrlParser: true, useUnifiedTopology: true }
 let allowedOrigins = [
   'http://localhost:8080', 
   'http://localhost:1234',
-  'https://ohmyflix.netlify.app/'
+  'https://ohmyflix.netlify.app'
 ];
+
 app.use(cors({
   origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
       let message = "The CORS policy for this application doesn't allow access from origin " + origin;
       return callback(new Error(message), false);
     }
