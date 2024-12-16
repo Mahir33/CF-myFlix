@@ -25,8 +25,8 @@ mongoose.connect(dbAtlasURL, { useNewUrlParser: true, useUnifiedTopology: true }
 // cors
 let allowedOrigins = [
   'http://localhost:8080', 
-  'http://testsite.com', 
-  'http://localhost:1234'
+  'http://localhost:1234',
+  'https://ohmyflix.netlify.app/'
 ];
 app.use(cors({
   origin: (origin, callback) => {
